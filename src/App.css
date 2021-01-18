@@ -1,38 +1,84 @@
-.App {
-  text-align: center;
+body{font-size: 8px}
+div{
+  -webkit-overflow-scrolling: touch;
+}
+.app{
+  background: #111
+}
+.fixed{
+  position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 0!important;
+      display: block
+}
+.top{
+  -webkit-transform: translate3d(0,0,0);
+}
+a{
+  text-decoration: none
+}
+hr{
+  height: 1px;
+  background:RGBA(255,255,255, .5);
+  border: none;
+  margin: 15px 0
+}
+input, select { font-size: 100%; }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input[type="text"], input[type="email"], input[type="number"]{
+  border: 1px solid #fff;
+  padding: 10px;
+  background: none;
+  color: #fff;
+  width: 100%;
+  margin: 5px 0 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+form>label{
+  width: 100%
 }
-
-.App-link {
-  color: #61dafb;
+.speech-bubble {
+	position: relative;
+	background: #f1f1f1;
+  border-radius: .4em;
+  display: inline-block;
+  vertical-align: bottom;
+  padding: 20px;
+  margin-bottom: 40px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 90%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #f1f1f1;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -19px;
+}
+.fr{float: right!important}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+ul>li{
+  padding: 10px 5%
+}
+ul>li:nth-child(even){
+  background: #000
 }
