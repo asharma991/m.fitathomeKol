@@ -6,12 +6,14 @@ import Styles from './app-style'
 import { callAPI, getURL, get, set } from './services';
 import emailTemplates from './emailTemplate.json';
 import {useHistory} from 'react-router-dom';
+
 const errMsgs = {
     requried: 'Uh oh! It\'s a required field',
     name: "Wait, that doesn't sound like a valid name",
     email: 'Please enter a valid email id',
     mobile: "That is certainly not a valid number. ",
-    country: "Did you miss the country code?"
+    country: "Did you miss the country code?",
+    age : "Please enter a valid age.",
 }
 const validate = function(value, regex, type){
     let error
@@ -37,7 +39,10 @@ function validateEmail(value){
     return validate(value, /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'email');
 }
 function validateCountry(value){
-    return validate(value, /^[0-9][A-Za-z0-9 -]*$/, 'country')
+    return validate(value, /^[0-9][A-Za-z0-9 -]*$/, 'country');
+}
+function validateAge(value){
+    return validate(value, /^(1[89]|[2-9]\d)$/, 'age');
 }
 
 export default (props)=>{
@@ -46,7 +51,7 @@ export default (props)=>{
     let [formSubmitting, updateFormSubmitting] = useState(false);
     let [sendingEmail, updatesendingEmail] = useState(false);
     function moveNxt(){
-        history.replace('secret');
+        history.replace('packages');
     }
     let formError = (err)=>{
         updateErr(true);
@@ -63,6 +68,8 @@ export default (props)=>{
     let submitForm = (values)=>{
         set('userDetails', values);
         updateFormSubmitting(true);
+        const campaign_id = get('campaign_id');
+        const affiliate_id= get('affiliate_id');
         let loc = get('loc');
         loc = JSON.parse(loc);
         loc.region = loc.region || null;
@@ -70,8 +77,23 @@ export default (props)=>{
         loc.city = loc.city ||null;
         loc.region = loc.country || null;
         loc.state = loc.region || null;
-        callAPI(getURL('insert_leads'), 'post', formSubmitted, formError, {
-            customer_name:values.name,customer_email:values.email,customer_phone:`${values.country}${values.mobile}`,Region:loc.country, ip: loc.ip, state: loc.state, city: loc.city});
+        let postArray=[{name:values.name,email:values.email,mobile:`${values.country}${values.mobile}`,city: loc.city,ip: loc.ip,mailStatus:null}];
+        //callAPI(getURL('insert_leads'), 'post', formSubmitted, formError, {
+        //    customer_name:values.name,customer_email:values.email,customer_phone:`${values.country}${values.mobile}`,Region:loc.country, ip: loc.ip, state: loc.state, city: loc.city});
+        callAPI(getURL('add_referrals'), 'post', formSubmitted, formError, {
+            //customer_name:values.name,
+            //customer_email:values.email,
+            //customer_phone:`${values.country}${values.mobile}`,
+            //customer_age:values.age,
+            affiliate_id: affiliate_id,
+            campaign_id: campaign_id, 
+            referrals:[...postArray],
+            //REGION INFO
+            //Region:loc.country, 
+            //ip: loc.ip, 
+            //state: loc.state, 
+            //city: loc.city,
+        });//ANV
         formSubmitted();       
     }
     if(err)
@@ -108,7 +130,8 @@ export default (props)=>{
                 name: '',
                 email:'',
                 country: 91,
-                mobile: ''
+                mobile: '',
+                age : '', 
                 }}
                 onSubmit = {(values)=>{submitForm(values)}}
             >
@@ -162,6 +185,17 @@ export default (props)=>{
                             </div>                      
                         </div>
                         {((touched.mobile && errors.mobile) || (touched.country && errors.country))  && <div style={Styles.err} variant="body2">{errors.mobile} {errors.country}</div>}
+                    </div>
+                    <div style={Styles.formFieldContainer}>
+                        <label htmlFor="age">
+                            <Typography style={Styles.whiteColor}>Age</Typography>
+                        </label>
+                        <Field
+                            name="age"
+                            type="number"
+                            validate={validateAge}
+                        />
+                        {touched.age && errors.age && <Typography style={Styles.err} variant="body2">{errors.age}</Typography>}
                     </div>
                     <Button type="submit" variant="contained" color="primary">
                         <Typography variant = "subtitle2">Proceed to join</Typography>

@@ -3,7 +3,6 @@ import './App.css';
 import GetStarted from './sections/getstarted';
 import Feelgood from './sections/feelgood';
 import Banner from './sections/banner';
-
 import Yoga from './sections/yoga';
 import Yogabanner from './sections/yogabanner';
 import Homeworkoutbanner from './sections/homeworkoutbanner';
@@ -12,7 +11,7 @@ import Diet from './sections/diet';
 import Homefood from './sections/homefood';
 import Coachingplan from './sections/coachingplan';
 import Fun from './sections/fun';
-import {docHt} from './services';
+import {docHt,set} from './services';
 
 class Home extends Component {
   constructor(props){
@@ -27,7 +26,7 @@ class Home extends Component {
   
   handleScroll(e){
     let scrollTop = window.scrollY;
-    console.log(window.scrollY);
+    //console.log(window.scrollY);
     let {section02, section03} = this.state;
     if(scrollTop>=(2*docHt()))
     {

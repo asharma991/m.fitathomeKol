@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Styles from './app-style';
-import { docHt, callAPI, getURL } from './services';
+import { docHt, callAPI, getURL,get } from './services';
 import Emailtemplates from './emailTemplate.json'
+import Refercomponents from './components/FormView';
+const empty = [{ displayname:'Name',value:'',error:null,type:'text',style:null},
+               { displayname:'Email',value:'',error:null,type:'email',style:null},              
+               { displayname:'Phone',value:'',error:null,type:'mobile',style:null}
+              ];              
+
 class Ordersummary extends Component{
     constructor(props){
         super(props);
@@ -11,7 +17,9 @@ class Ordersummary extends Component{
         }
     }
     componentDidMount(){
-        callAPI(getURL('order_status'), 'post', (data)=>{this.orderData(data.data)}, (err)=>{this.orderStatus(err)}, {order_id:this.props.match.params.orderId})
+        const campaign_id = get('campaign_id');
+        //callAPI(getURL('order_status'), 'post', (data)=>{this.orderData(data.data)}, (err)=>{this.orderStatus(err)}, {order_id:this.props.match.params.orderId})
+        callAPI(getURL('campaign_order_status'), 'post', (data)=>{this.orderData(data.data)}, (err)=>{this.orderStatus(err)}, {order_id:this.props.match.params.orderId ,campaign_id:campaign_id});
     }
     emailSent(data){
         this.setState({orderStatus: 'success'})
@@ -21,13 +29,14 @@ class Ordersummary extends Component{
     }
     orderData(data){
         console.log("Order successful");
-        let {order_status, customer_phone, customer_email, customer_name, order_date, order_amount, currency} = data;
+        let {order_status, customer_phone, customer_email, customer_name, order_date, order_amount, currency,new_affiliate_id} = data;
+        console.log(data);
         // let loc = JSON.parse(get('loc'));
         // this.setState({orderStatus: 'success', name: customer_name, email: customer_email});
         
         if(parseInt(order_status)===1)
         {
-            this.setState({orderStatus: 'sendingEmail', name: customer_name, email: customer_email});
+            this.setState({orderStatus: 'sendingEmail', name: customer_name, email: customer_email,new_affiliate_id:new_affiliate_id});
             let emailBody = Emailtemplates.paymentComplete.replace(/#fname/g, customer_name.split(" ")[0]).replace(/#email/g, customer_email).replace(/#full_name/g,customer_name).replace(/#mob/g, `${customer_phone}`).replace(/#date/g,order_date).replace(/#amount/g, `${currency} ${order_amount}`);
             console.log("Email template", emailBody);
             callAPI(getURL('sendEmail'), 'post', (data)=>{this.emailSent(data)}, (err)=>{this.emailErr(err)}, {to: customer_email, cc: 'info@getsetgo.fitness', subject: 'GetSetGo Fitness: Your fitness journey starts here', message: emailBody});
@@ -45,7 +54,7 @@ class Ordersummary extends Component{
         })
     }
     render(){
-        let {orderStatus, name} = this.state;
+        let {orderStatus, name,new_affiliate_id} = this.state;
         return (
         <Grid container style={{height: docHt()}} alignItems="center" justify="center">
             {orderStatus==="waiting" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt}}>
@@ -82,6 +91,11 @@ class Ordersummary extends Component{
                     Do not worry though. Your package is totally secure. Simply drop us an email at: <a href="mailto: info@getsetgo.fitness">info@getsetgo.fitness</a>. Remember to quote your order id in the email: {this.props.match.params.orderId}
                 </Typography>
             </Grid>}
+            {((orderStatus === "success") ||(orderStatus === "successEmailErr"))&&(
+             <Grid item container style={{...Styles.colorWhite, ...Styles.marginBottom}} alignItems="flex-end" justify="center" xs={12} >
+            {/* <Refercomponents  fields = {empty} affiliate_name="Anurag Vishwakarma"affiliate_email = "vaibhav@getsetgo.fitess" affiliate_mobile = "+919821354464" campaign_id="1" ></Refercomponents> */}
+            <Refercomponents  fields = {empty} affiliate_id={new_affiliate_id} campaign_id={get('campaign_id')} ></Refercomponents>
+          </Grid>)}
         </Grid>)
     } 
 }

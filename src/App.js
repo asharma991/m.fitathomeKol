@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import Header from './sections/header';
 import Footer from './sections/footer';
+import ScrollToTop from './scrolltotop';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import ScrollToTop from './scrolltotop';
+
 import theme from './theme';
 import {docHt, updateLoc} from './services';
 import {
@@ -21,7 +22,7 @@ ReactGA.initialize('UA-86957619-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
 ReactGA.pageview('/');
 ReactGA.pageview('/packages');
-ReactGA.pageview('/secret');
+//ReactGA.pageview('/secret');
 ReactGA.pageview('/summary');
 
 
@@ -51,7 +52,7 @@ class App extends Component{
                 <Route path="/" exact>
                   <Home freezeScroll={(val)=>{this.freezeScroll(val)}}/>
                 </Route>
-                <Route path="/secret" component = {Secret}/>
+                {/* <Route path="/secret" component = {Secret}/> */}
                 <Route path="/packages">
                     <Package freezeScroll={(val)=>{this.freezeScroll(val)}}/>
                   </Route>

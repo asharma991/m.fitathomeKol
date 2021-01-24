@@ -1,62 +1,63 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import Exoregular from './fonts/exo-2-v7-latin-regular.woff2';
-import Exobold from './fonts/exo-2-v7-latin-600.woff2';
-import Exoheavy from './fonts/exo-2-v7-latin-500.woff2';
-import Exothin from './fonts/exo-2-v7-latin-300.woff2';
+//import Exoregular from './fonts/exo-2-v7-latin-regular.woff2';
+//import Exobold from './fonts/exo-2-v7-latin-600.woff2';
+//import Exoheavy from './fonts/exo-2-v7-latin-500.woff2';
+//import Exothin from './fonts/exo-2-v7-latin-300.woff2';
+import TestThin from "./fonts/Montserrat-Thin.ttf";
+import Test from "./fonts/Montserrat-Regular.woff";
 import {colors} from './services';
 
-const exoThin = {
-    fontFamily: 'Exo',
-    fontStyle: 'normal',
-    fontDisplay: 'swap',
-    fontWeight: 300,
-    src: `
-      local('Exo'),
-      local('Exo-Thin'),
-      url(${Exothin}) format('woff2')
+const testThin = {
+  fontFamily: "Test-Thin",
+  fontStyle: "normal",
+  fontDisplay: "swap",
+  src: `
+      local('Test'),
+      local('Test-Thin'),
+      url(${TestThin}) format('truetype')
     `,
     unicodeRange:
       'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
   };
-const exo = {
-  fontFamily: 'Exo',
+const test = {
+  fontFamily: 'Test',
   fontStyle: 'normal',
   fontDisplay: 'swap',
   fontWeight: 400,
   src: `
-    local('Exo'),
-    local('Exo-regular'),
-    url(${Exoregular}) format('woff2')
+    local('Test'),
+    local('Test'),
+    url(${Test}) format('woff2')
   `,
   unicodeRange:
     'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
 };
-const exoHeavy = {
-    fontFamily: 'Exo',
-    fontStyle: 'normal',
-    fontDisplay: 'swap',
-    fontWeight: 500,
-    src: `
-      local('Exo'),
-      local('Exo-Heavy'),
-      url(${Exoheavy}) format('woff2')
-    `,
-    unicodeRange:
-      'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
-  };
-const exoBold = {
-    fontFamily: 'Exo',
-    fontStyle: 'normal',
-    fontDisplay: 'swap',
-    fontWeight: 600,
-    src: `
-      local('Exo'),
-      local('Exo-Bold'),
-      url(${Exobold}) format('woff2')
-    `,
-    unicodeRange:
-      'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
-  };
+// const exoHeavy = {
+//     fontFamily: 'Exo',
+//     fontStyle: 'normal',
+//     fontDisplay: 'swap',
+//     fontWeight: 500,
+//     src: `
+//       local('Exo'),
+//       local('Exo-Heavy'),
+//       url(${Exoheavy}) format('woff2')
+//     `,
+//     unicodeRange:
+//       'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
+//   };
+// const exoBold = {
+//     fontFamily: 'Exo',
+//     fontStyle: 'normal',
+//     fontDisplay: 'swap',
+//     fontWeight: 600,
+//     src: `
+//       local('Exo'),
+//       local('Exo-Bold'),
+//       url(${Exobold}) format('woff2')
+//     `,
+//     unicodeRange:
+//       'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
+//   };
 
 const theme = createMuiTheme({
     palette: {
@@ -68,8 +69,8 @@ const theme = createMuiTheme({
         }
       },
     typography: {
-        fontFamily: 'Exo, Arial',
-        color: '#fff',
+        //fontFamily: 'Exo, Arial',
+        color:colors.secondary,// '#fff',
         root: {
             color: colors.secondary
         },
@@ -107,7 +108,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
-            '@font-face': [exo, exoBold, exoHeavy, exoThin],
+            '@font-face': [],
             },
         },
         MuiButton: {
