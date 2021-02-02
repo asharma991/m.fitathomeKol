@@ -17,7 +17,7 @@ class Ordersummary extends Component{
         }
     }
     componentDidMount(){
-        const campaign_id = get('campaign_id');
+        let campaign_id = get('campaign_id')===null?1:get('campaign_id');
         //callAPI(getURL('order_status'), 'post', (data)=>{this.orderData(data.data)}, (err)=>{this.orderStatus(err)}, {order_id:this.props.match.params.orderId})
         callAPI(getURL('campaign_order_status'), 'post', (data)=>{this.orderData(data.data)}, (err)=>{this.orderStatus(err)}, {order_id:this.props.match.params.orderId ,campaign_id:campaign_id});
     }
@@ -94,7 +94,7 @@ class Ordersummary extends Component{
             {((orderStatus === "success") ||(orderStatus === "successEmailErr"))&&(
              <Grid item container style={{...Styles.colorWhite, ...Styles.marginBottom}} alignItems="flex-end" justify="center" xs={12} >
             {/* <Refercomponents  fields = {empty} affiliate_name="Anurag Vishwakarma"affiliate_email = "vaibhav@getsetgo.fitess" affiliate_mobile = "+919821354464" campaign_id="1" ></Refercomponents> */}
-            <Refercomponents  fields = {empty} affiliate_id={new_affiliate_id} campaign_id={get('campaign_id')} ></Refercomponents>
+            <Refercomponents  fields = {empty} affiliate_id={new_affiliate_id} campaign_id={get('campaign_id')===null?1:get('campaign_id')} ></Refercomponents>
           </Grid>)}
         </Grid>)
     } 

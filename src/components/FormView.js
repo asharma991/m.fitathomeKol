@@ -115,7 +115,7 @@ class ReferralForm extends React.Component{
              this.setState({response:{userArray : postArray, url : uniqueURL , message : message}})
             //console.log(this.state.response);
             }
-              )
+              ).catch((error)=>{console.log(error)})
             //{console.log(response.data.unique_url + response.data.message+response.data.details)}) 
         }
       }

@@ -11,12 +11,12 @@ export default function ScrollToTop(app) {
       set("affiliate_id",params.get("affiliate_id"));
       set("affiliate_type",params.get("affiliate_type"));//Avn  
     }
-    else
-    {    
-      set("campaign_id",1);
-      set("affiliate_id",1);
-      set("affiliate_type",1);
-    }
+    // else
+    // {    
+    //   set("campaign_id",1);
+    //   set("affiliate_id",1);
+    //   set("affiliate_type",1);
+    // }
   //console.log(get("campaign_id"));
   //console.log(get("affiliate_id"));
   //console.log(get("affiliate_id")); 

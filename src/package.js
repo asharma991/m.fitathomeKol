@@ -31,13 +31,15 @@ class Package extends Component{
         let userDetails = JSON.parse(get('userDetails'));
         console.log("index",index);
         let package_id = product.service_id
-        let campaign_id = get('campaign_id');
+        let campaign_id = get('campaign_id')===null?1:get('campaign_id');
+        let affiliate_id= get("affiliate_id")===null?1:get('affiliate_id');
         this.setState({bored: false});
         if(!userDetails)
             this.setState({userData: false});
         else{//campagin create order call
             //callAPI(getURL('create_order'),'post',(data)=>{this.orderCreated(data)},(err)=>{this.errorOrderCreated(err)}, {"orderNote":`KOL ${index+1} people`,"package_id":package_id,"customer_name":userDetails.name,"customer_email":userDetails.email, "customer_phone":`${userDetails.country}-${userDetails.mobile}`, "redirect_url":"http://localhost:3000"+"/thank_you"})
             callAPI(getURL('campaign_create_order'),'post',(data)=>{this.orderCreated(data)},(err)=>{this.errorOrderCreated(err)}, {"orderNote":`KOL ${index+1} people`,"package_id":package_id,"customer_name":userDetails.name,"customer_email":userDetails.email, "customer_phone":`${userDetails.country}-${userDetails.mobile}`,"affiliate_id":get("affiliate_id"), "redirect_url":baseurl+"/thank_you","campaign_id":campaign_id});
+            console.log(affiliate_id);
         }
     }
     orderCreated(data){
@@ -73,7 +75,7 @@ class Package extends Component{
     }
     getproducts=()=>{
         let currency = this.state.currency;
-        let campaign_id= get('campaign_id');
+        let campaign_id = get('campaign_id')===null?1:get('campaign_id');
          let currencytext = (currency==="₹" ? "INR":currency)||(currency==="$" ? "USD":currency)||(currency==="aed" ? "AED":currency);
         callAPI("https://api.getsetgo.fitness/base_ind/API/v1/fetch_services","post",
       data => {
