@@ -6,7 +6,8 @@ import RemoveSharpIcon from '@material-ui/icons/RemoveSharp';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import _ from 'lodash'
 import axios from 'axios';
-import Grid from "@material-ui/core/Grid"
+import Styles from '../app-style';
+import {Grid,Typography} from "@material-ui/core/"
 import Thanks from "./Thanks"
 //import Container from '@material-ui/core/Container';
 //import DefaultStyle from "./FormRender";
@@ -41,7 +42,7 @@ class ReferralForm extends React.Component{
           break;
         case 'email': 
         errorMsg = 
-          emailReg.test(value)? null:'Please enter a valid email address!';
+          emailReg.test(value)? null:'Please enter a valid email!';
           break;
         case 'phone':
         errorMsg = 
@@ -126,12 +127,13 @@ class ReferralForm extends React.Component{
              <h1>Enjoy free gifts and rewards points by referring more people </h1>
               <form onSubmit = {(e)=>this.handleSubmit(e)}>
               {this.state.inputFeildRows.map((inputRow,row)=>(
-              <Grid item container  key={row} spacing={2} style={{backgroundColor:'#e1f5e5'}}>
+              <Grid item container  key={row} spacing={2} style={Styles.formFieldContainer} >
                 {
                 inputRow.map((inputCol,col)=>(
                   <Grid item key={col}>
-                <TextField  name ={inputCol.displayname} value={inputCol.value}  error={inputCol.error?true:false}
-                id="outlined-basic" variant="outlined" label={inputCol.error ?inputCol.error:inputCol.displayname} 
+                    <Typography>{inputCol.displayname}</Typography>
+                <TextField  color='secondary' size ='small' name ={inputCol.displayname} value={inputCol.value}  error={inputCol.error?true:false}
+                id="filled" variant="filled" label={inputCol.error ?inputCol.error:''} 
                 onChange={(e)=>this.handleChangeInput(row,col,e)} onBlur={(e)=>this.validate(row,col,e)}  style={inputCol.style? inputCol.style:null}/>
                 </Grid>
               ))
