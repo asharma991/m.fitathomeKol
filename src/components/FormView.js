@@ -119,15 +119,15 @@ class ReferralForm extends React.Component{
               ).catch((error)=>{console.log(error)})
             //{console.log(response.data.unique_url + response.data.message+response.data.details)}) 
         }
-      }
+      }//styles={{overflow: 'scroll'}}
  render(){
     return(
       <Grid >
-       { (this.state.response==='')&&<Grid item container direction="column" justify="center" alignItems="center" spacing={2}>
-             <h1>Enjoy free gifts and rewards points by referring more people </h1>
+       { (this.state.response==='')&&<Grid item container  direction="column" justify="center" alignItems="center" spacing={2}>
+             <h3>Enjoy free gifts and rewards points by referring more people </h3>
               <form onSubmit = {(e)=>this.handleSubmit(e)}>
               {this.state.inputFeildRows.map((inputRow,row)=>(
-              <Grid item container  key={row} spacing={2} style={Styles.formFieldContainer} >
+              <Grid item container  direction ='column' key={row} spacing={2} >
                 {
                 inputRow.map((inputCol,col)=>(
                   <Grid item key={col}>
