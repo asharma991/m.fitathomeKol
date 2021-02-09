@@ -57,17 +57,17 @@ class Ordersummary extends Component{
         let {orderStatus, name,new_affiliate_id} = this.state;
         return (
         <Grid container style={{height: docHt()}} alignItems="center" justify="center">
-            {orderStatus==="waiting" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt}}>
+            {orderStatus==="waiting" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt,...Styles.ordersummarySuccessMsg}}>
                 <Typography variant="subtitle1" style={Styles.colorWhite}>
                     Give us a minute. Completing your registration ...
                 </Typography>
             </Grid>}
-            {orderStatus==="sendingEmail" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt}}>
+            {orderStatus==="sendingEmail" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt,...Styles.ordersummarySuccessMsg}}>
                 <Typography variant="subtitle1" style={Styles.colorWhite}>
                     Okay, payment complete. Sending you an email acknowledgement ...
                 </Typography>
             </Grid>}
-            {orderStatus==="successEmailErr" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt}}>
+            {orderStatus==="successEmailErr" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt,...Styles.ordersummarySuccessMsg}}>
                 <Typography variant="subtitle1" style={{...Styles.colorWhite, ...Styles.marginBottom}}>
                     ... And we're done! Your registration is complete
                 </Typography>
@@ -75,7 +75,7 @@ class Ordersummary extends Component{
                     Congratulations {name.split(" ")[0]}! There has been a small glitch: we haven't been able to drop you an email. Don't worry though. Our backend team qill quickly review this. For your registration, our representatives will get in touch with you within 2 working days. Feel free to drop us an email in case you have any queries: <a href="mailto: info@getsetgo.fitness">info@getsetgo.fitness</a>
                 </Typography>
             </Grid>}
-            {orderStatus==="success" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt}}>
+            {orderStatus==="success" && <Grid item style={{...Styles.padding5, ...Styles.centerTxt,...Styles.ordersummarySuccessMsg}}>
                 <Typography variant="subtitle1" style={{...Styles.colorWhite, ...Styles.marginBottom}}>
                     ... And we're done! Your registration is complete
                 </Typography>
@@ -83,7 +83,7 @@ class Ordersummary extends Component{
                     Congratulations {name.split(" ")[0]}! Our representatives will get in touch with you within 2 working days. Feel free to drop us an email in case you have any queries: <a href="mailto: info@getsetgo.fitness">info@getsetgo.fitness</a>
                 </Typography>
             </Grid>}
-            {(orderStatus==="fail" || orderStatus==="err") && <Grid item style={{...Styles.padding5, ...Styles.centerTxt}}>
+            {(orderStatus==="fail" || orderStatus==="err") && <Grid item style={{...Styles.padding5, ...Styles.centerTxt,...Styles.ordersummarySuccessMsg}}>
                 <Typography variant="subtitle1" style={{...Styles.colorWhite, ...Styles.marginBottom}}>
                     Uh oh, seems like your order got stuck somewhere. Do not worry though
                 </Typography>

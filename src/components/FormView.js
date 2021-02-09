@@ -122,16 +122,17 @@ class ReferralForm extends React.Component{
       }//styles={{overflow: 'scroll'}}
  render(){
     return(
-      <Grid >
-       { (this.state.response==='')&&<Grid item container  direction="column" justify="center" alignItems="center" spacing={2}>
+      <Grid style={{overflow: 'scroll',paddingBottom: '170px'}} >
+       { (this.state.response==='')&&<Grid item container  
+            direction="column" justify="center" alignItems="center" spacing={2}>
              <h3>Enjoy free gifts and rewards points by referring more people </h3>
               <form onSubmit = {(e)=>this.handleSubmit(e)}>
               {this.state.inputFeildRows.map((inputRow,row)=>(
               <Grid item container  direction ='column' key={row} spacing={2} >
                 {
                 inputRow.map((inputCol,col)=>(
-                  <Grid item key={col}>
-                    <Typography>{inputCol.displayname}</Typography>
+                  <Grid item container direction='row' justify="center" alignItems="center"  key={col}>
+                    <Typography>{inputCol.displayname}&nbsp;&nbsp;</Typography>
                 <TextField  color='secondary' size ='small' name ={inputCol.displayname} value={inputCol.value}  error={inputCol.error?true:false}
                 id="filled" variant="filled" label={inputCol.error ?inputCol.error:''} 
                 onChange={(e)=>this.handleChangeInput(row,col,e)} onBlur={(e)=>this.validate(row,col,e)}  style={inputCol.style? inputCol.style:null}/>

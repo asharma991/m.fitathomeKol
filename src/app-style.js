@@ -1,4 +1,5 @@
 
+import Ordersummary from './ordersummary';
 import {colors} from './services';
 let docHt = document.documentElement.clientHeight;
 export default{
@@ -95,7 +96,9 @@ export default{
     footer:{
       padding: '50px',
       background: '#000',
-      textAlign: 'center'
+      textAlign: 'center',
+      position: 'fixed',
+      bottom: '0',
     },
     popup:{position: 'fixed', top: 0, left: 0, height: '100vh', paddingTop:'120px', width: '100%', background: '#000'},
     //form styles
@@ -104,5 +107,6 @@ export default{
     err: {color: colors.err},
     special: {display: 'inline-block', width: '5%', textAlign: 'center'},
     countryContainer:{display: 'inline-block', width: '15%'},
-    mobileContainer: {display: 'inline-block', width: '75%'}
+    mobileContainer: {display: 'inline-block', width: '75%'},
+    ordersummarySuccessMsg: {marginBottom:'60px',marginTop:'100px'}
   }
