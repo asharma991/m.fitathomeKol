@@ -94,11 +94,12 @@ export default{
       zIndex: 20000
     },
     footer:{
-      padding: '50px',
+      padding: '20px',
       background: '#000',
       textAlign: 'center',
       position: 'fixed',
       bottom: '0',
+      width :'100%'
     },
     popup:{position: 'fixed', top: 0, left: 0, height: '100vh', paddingTop:'120px', width: '100%', background: '#000'},
     //form styles
@@ -108,5 +109,6 @@ export default{
     special: {display: 'inline-block', width: '5%', textAlign: 'center'},
     countryContainer:{display: 'inline-block', width: '15%'},
     mobileContainer: {display: 'inline-block', width: '75%'},
-    ordersummarySuccessMsg: {marginBottom:'60px',marginTop:'100px'}
+    ordersummarySuccessMsg: {marginBottom:'60px',marginTop:'100px'},
+    footerfont: {fontSize:'0.9rem'},
   }

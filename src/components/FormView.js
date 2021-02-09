@@ -122,7 +122,7 @@ class ReferralForm extends React.Component{
       }//styles={{overflow: 'scroll'}}
  render(){
     return(
-      <Grid style={{overflow: 'scroll',paddingBottom: '170px'}} >
+      <Grid style={{overflow: 'scroll',padding: '15px 15px 170px 15px',textAlign:'center'}} >
        { (this.state.response==='')&&<Grid item container  
             direction="column" justify="center" alignItems="center" spacing={2}>
              <h3>Enjoy free gifts and rewards points by referring more people </h3>
