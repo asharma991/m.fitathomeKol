@@ -38,7 +38,7 @@ class Package extends Component{
             this.setState({userData: false});
         else{//campagin create order call
             //callAPI(getURL('create_order'),'post',(data)=>{this.orderCreated(data)},(err)=>{this.errorOrderCreated(err)}, {"orderNote":`KOL ${index+1} people`,"package_id":package_id,"customer_name":userDetails.name,"customer_email":userDetails.email, "customer_phone":`${userDetails.country}-${userDetails.mobile}`, "redirect_url":"http://localhost:3000"+"/thank_you"})
-            callAPI(getURL('campaign_create_order'),'post',(data)=>{this.orderCreated(data)},(err)=>{this.errorOrderCreated(err)}, {"orderNote":`KOL ${index+1} people`,"package_id":package_id,"customer_name":userDetails.name,"customer_email":userDetails.email, "customer_phone":`${userDetails.country}-${userDetails.mobile}`,"affiliate_id":get("affiliate_id"), "redirect_url":baseurl+"/thank_you","campaign_id":campaign_id});
+            callAPI(getURL('campaign_create_order'),'post',(data)=>{this.orderCreated(data)},(err)=>{this.errorOrderCreated(err)}, {"orderNote":`KOL ${index+1} people`,"package_id":package_id,"customer_name":userDetails.name,"customer_email":userDetails.email, "customer_phone":`${userDetails.country}-${userDetails.mobile}`,"affiliate_id":affiliate_id, "redirect_url":baseurl+"/thank_you","campaign_id":campaign_id});
             console.log(affiliate_id);
         }
     }
